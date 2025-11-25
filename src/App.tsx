@@ -33,63 +33,81 @@ class App extends React.Component<{}, State> {
         {/* eslint-disable-next-line */}
         <h1 data-cy="title">Carousel with {images.length} images</h1>
         <div className="controlers">
-          <label htmlFor="widh">Item width: </label>
-          <input
-            id="widh"
-            type="number"
-            value={itemWidth}
-            step={10}
-            onChange={e => {
-              this.setState({ itemWidth: Number(e.target.value) });
-            }}
-          />
-          <label htmlFor="size">Frame size: </label>
-          <input
-            id="size"
-            type="number"
-            value={frameSize}
-            step={1}
-            max={images.length}
-            min={1}
-            onChange={e => {
-              this.setState({ frameSize: Number(e.target.value) });
-            }}
-          />
-          <label htmlFor="step">Step: </label>
-          <input
-            id="step"
-            type="number"
-            value={step}
-            step={1}
-            min={1}
-            max={images.length}
-            onChange={e => {
-              this.setState({ step: Number(e.target.value) });
-            }}
-          />
-          <label htmlFor="duration">Animation duration (ms): </label>
-          <input
-            id="duration"
-            type="number"
-            value={animationDuration}
-            step={100}
-            min={1000}
-            max={10000}
-            onChange={e => {
-              this.setState({ animationDuration: Number(e.target.value) });
-            }}
-          />
-          <label htmlFor="infinite">Infinite: </label>
-          <input
-            id="infinite"
-            type="checkbox"
-            checked={infinite}
-            onChange={e => {
-              this.setState({ infinite: e.target.checked });
-            }}
-          />
+          <div className="controlers__item">
+            <label htmlFor="widh">Item width: </label>
+            <input
+              id="widh"
+              type="number"
+              value={itemWidth}
+              step={10}
+              onChange={e => {
+                this.setState({ itemWidth: Number(e.target.value) });
+              }}
+            />
+          </div>
+          <div className="controlers__item">
+            <label htmlFor="size">Frame size: </label>
+            <input
+              id="size"
+              type="number"
+              value={frameSize}
+              step={1}
+              max={images.length}
+              min={1}
+              onChange={e => {
+                this.setState({ frameSize: Number(e.target.value) });
+              }}
+            />
+          </div>
+          <div className="controlers__item">
+            <label htmlFor="step">Step: </label>
+            <input
+              id="step"
+              type="number"
+              value={step}
+              step={1}
+              min={1}
+              max={images.length}
+              onChange={e => {
+                this.setState({ step: Number(e.target.value) });
+              }}
+            />
+          </div>
+
+          <div className="controlers__item">
+            <label htmlFor="duration">Animation duration (ms): </label>
+            <input
+              id="duration"
+              type="number"
+              value={animationDuration}
+              step={100}
+              min={1000}
+              max={10000}
+              onChange={e => {
+                this.setState({ animationDuration: Number(e.target.value) });
+              }}
+            />
+          </div>
+          <div className="controlers__item controlers__item--checkbox">
+            <label htmlFor="infinite">Infinite: </label>
+            <input
+              id="infinite"
+              type="checkbox"
+              checked={infinite}
+              onChange={e => {
+                this.setState({ infinite: e.target.checked });
+              }}
+            />
+          </div>
         </div>
-        <Carousel />
+        <Carousel
+          images={images}
+          itemWidth={itemWidth}
+          frameSize={frameSize}
+          step={step}
+          animationDuration={animationDuration}
+          infinite={infinite}
+        />
       </div>
     );
   }

@@ -1,28 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Carousel.scss';
 
-const Carousel: React.FC = () => (
-  <div className="Carousel">
-    <button type="button">Prev</button>
-    <ul className="Carousel__list">
-      <li className="Carousel__item">
-        <img src="./img/1.png" alt="1" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="2" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="3" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="4" />
-      </li>
-    </ul>
+import { State } from '../Types/State';
 
-    <button data-cy="next" type="button">
-      Next
-    </button>
-  </div>
-);
+const Carousel: React.FC<State> = ({
+  images,
+  itemWidth,
+  frameSize,
+  step,
+  animationDuration,
+  infinite,
+}) => {
+  const [shift, setShift] = useState<number>(0);
+
+  const moveNext = () => {
+    if (infinite) {
+    }
+
+    setShift(prev => prev - step * itemWidth);
+  };
+
+  const movePrev = () => {
+    setShift(prev => prev + step * itemWidth);
+  };
+
+  return (
+    <div className="Carousel">
+      <button onClick={movePrev} type="button">
+        Prev
+      </button>
+      <div
+        className="Carousel__container"
+        style={{ width: itemWidth * frameSize }}
+      >
+        <ul
+          className="Carousel__list"
+          style={{
+            transform: `translateX(${shift}px)`,
+            transition: `translateX, ${animationDuration}ms ease-in-out`,
+          }}
+        >
+          {images.map((image: string, index: number) => (
+            <li key={index} className="Carousel__item">
+              <img
+                style={{ width: itemWidth }}
+                src={image}
+                alt={String(index)}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <button onClick={moveNext} data-cy="next" type="button">
+        Next
+      </button>
+    </div>
+  );
+};
 
 export default Carousel;
