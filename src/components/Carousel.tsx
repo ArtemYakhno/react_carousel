@@ -3,8 +3,9 @@ import './Carousel.scss';
 
 const Carousel: React.FC = () => (
   <div className="Carousel">
+    <button type="button">Prev</button>
     <ul className="Carousel__list">
-      <li>
+      <li className="Carousel__item">
         <img src="./img/1.png" alt="1" />
       </li>
       <li>
@@ -18,8 +19,9 @@ const Carousel: React.FC = () => (
       </li>
     </ul>
 
-    <button type="button">Prev</button>
-    <button type="button">Next</button>
+    <button data-cy="next" type="button">
+      Next
+    </button>
   </div>
 );
 

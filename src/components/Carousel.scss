@@ -1,1 +1,17 @@
 // style go here
+.Carousel {
+  width: 1300px;
+  display: flex;
+  align-items: center;
+
+  &__list {
+    width: 260px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  &__item {
+    width: 130px;
+    aspect-ratio: 1;
+  }
+}

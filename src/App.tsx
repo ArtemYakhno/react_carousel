@@ -1,10 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Carousel from './components/Carousel';
-
-interface State {
-  images: string[];
-}
+import { State } from './Types/State';
 
 class App extends React.Component<{}, State> {
   state = {
@@ -20,16 +17,78 @@ class App extends React.Component<{}, State> {
       './img/9.png',
       './img/10.png',
     ],
+    itemWidth: 130,
+    frameSize: 3,
+    step: 3,
+    animationDuration: 1000,
+    infinite: false,
   };
 
   render() {
-    const { images } = this.state;
+    const { images, itemWidth, frameSize, step, animationDuration, infinite } =
+      this.state;
 
     return (
       <div className="App">
         {/* eslint-disable-next-line */}
-        <h1>Carousel with {images.length} images</h1>
-
+        <h1 data-cy="title">Carousel with {images.length} images</h1>
+        <div className="controlers">
+          <label htmlFor="widh">Item width: </label>
+          <input
+            id="widh"
+            type="number"
+            value={itemWidth}
+            step={10}
+            onChange={e => {
+              this.setState({ itemWidth: Number(e.target.value) });
+            }}
+          />
+          <label htmlFor="size">Frame size: </label>
+          <input
+            id="size"
+            type="number"
+            value={frameSize}
+            step={1}
+            max={images.length}
+            min={1}
+            onChange={e => {
+              this.setState({ frameSize: Number(e.target.value) });
+            }}
+          />
+          <label htmlFor="step">Step: </label>
+          <input
+            id="step"
+            type="number"
+            value={step}
+            step={1}
+            min={1}
+            max={images.length}
+            onChange={e => {
+              this.setState({ step: Number(e.target.value) });
+            }}
+          />
+          <label htmlFor="duration">Animation duration (ms): </label>
+          <input
+            id="duration"
+            type="number"
+            value={animationDuration}
+            step={100}
+            min={1000}
+            max={10000}
+            onChange={e => {
+              this.setState({ animationDuration: Number(e.target.value) });
+            }}
+          />
+          <label htmlFor="infinite">Infinite: </label>
+          <input
+            id="infinite"
+            type="checkbox"
+            checked={infinite}
+            onChange={e => {
+              this.setState({ infinite: e.target.checked });
+            }}
+          />
+        </div>
         <Carousel />
       </div>
     );
