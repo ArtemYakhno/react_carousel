@@ -4,6 +4,18 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // display: flex;
-  // justify-content: center;
+}
+
+.controlers{
+  width: 300px;
+  display: grid;
+  row-gap: 8px;
+  &__item{
+    display: grid;
+    row-gap: 4px;
+    &--checkbox{
+      grid-template-columns: min-content min-content;
+      column-gap: 4px;
+    }
+  }
 }
