@@ -27,11 +27,27 @@ const Carousel: React.FC<State> = ({
   );
 
   const moveNext = () => {
-    setShift(prev => Math.max(computeNextShift(prev, true), maxShift));
+    setShift(prev => {
+      const nextShift = computeNextShift(prev, true);
+
+      if (infinite) {
+        return nextShift < maxShift ? 0 : nextShift;
+      }
+
+      return Math.max(nextShift, maxShift);
+    });
   };
 
   const movePrev = () => {
-    setShift(prev => Math.min(computeNextShift(prev, false), minShift));
+    setShift(prev => {
+      const nextShift = computeNextShift(prev, false);
+
+      if (infinite) {
+        return nextShift > minShift ? maxShift : nextShift;
+      }
+
+      return Math.min(nextShift, minShift);
+    });
   };
 
   useEffect(() => {
