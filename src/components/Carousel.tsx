@@ -73,7 +73,7 @@ const Carousel: React.FC<State> = ({
       <button
         onClick={movePrev}
         type="button"
-        disabled={shift === minShift}
+        disabled={!infinite && shift === minShift}
         data-cy="prev"
       >
         Prev
@@ -86,7 +86,7 @@ const Carousel: React.FC<State> = ({
           className="Carousel__list"
           style={{
             transform: `translateX(${shift}px)`,
-            transition: `transform, ${animationDuration}ms ease-in-out`,
+            transition: `transform ${animationDuration}ms ease-in-out`,
           }}
         >
           {images.map((image: string, index: number) => (
@@ -106,7 +106,7 @@ const Carousel: React.FC<State> = ({
         onClick={moveNext}
         data-cy="next"
         type="button"
-        disabled={shift === maxShift}
+        disabled={!infinite && shift === maxShift}
       >
         Next
       </button>
